@@ -7,4 +7,5 @@ USER node
 RUN npm install
 COPY --chown=node:node . .
 ENV PORT=8080
+ENV HOST=y-websocket.pingcode.live
 CMD [ "npm", "start" ]
