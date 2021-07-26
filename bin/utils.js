@@ -168,7 +168,9 @@ const messageListener = (conn, doc, message) => {
   switch (messageType) {
     case messageSync:
       encoding.writeVarUint(encoder, messageSync)
+      // 处理 ydoc 更新？
       syncProtocol.readSyncMessage(decoder, encoder, doc, null)
+      // 在这里返回给客户端内容更新？
       if (encoding.length(encoder) > 1) {
         send(doc, conn, encoding.toUint8Array(encoder))
       }

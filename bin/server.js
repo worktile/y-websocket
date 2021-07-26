@@ -10,7 +10,7 @@ const { MongodbPersistence } = require('y-mongodb');
 const { setupWSConnection, setPersistence } = require('./utils.js')
 
 const location = process.env.MONGODB_URI;
-const collection = 'wiki_pages_transactions';
+const collection = 'wiki_page_transactions';
 const ldb = new MongodbPersistence(location, collection);
 
 const host = process.env.HOST || 'localhost'
@@ -47,6 +47,7 @@ setPersistence({
 
     const persistedYdoc = await ldb.getYDoc(docName);
     const newUpdates = Y.encodeStateAsUpdate(ydoc);
+    // 同步本地更新
     ldb.storeUpdate(docName, newUpdates)
     Y.applyUpdate(ydoc, Y.encodeStateAsUpdate(persistedYdoc));
     ydoc.on('update', async update => {
