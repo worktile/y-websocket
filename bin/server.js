@@ -5,6 +5,7 @@
  */
 const WebSocket = require('ws')
 const http = require('http')
+const Y = require('yjs');
 const wss = new WebSocket.Server({ noServer: true })
 const { MongodbPersistence } = require('y-mongodb');
 const { setupWSConnection, setPersistence } = require('./utils.js')
